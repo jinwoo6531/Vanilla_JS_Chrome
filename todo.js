@@ -41,7 +41,7 @@ function handleSubmit(e) {
 
 function loadToDos() {
     const loadToDos = localStorage.getItem(TODOS_LS);
-    if(loadToDos === null) {
+    if(loadToDos !== null) {
         const parsedToDos = JSON.parse(loadToDos);
         parsedToDos.forEach(toDo => paintToDo(toDo.text));
     } 

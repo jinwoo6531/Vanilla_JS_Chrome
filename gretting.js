@@ -28,6 +28,7 @@ function paintGreeting(text) {
 }
 
 function loadName() {
+  //localStorage에 저장된 currentUser를 가져온다.
   const currentUser = localStorage.getItem(USER_LS);
   if (currentUser === null) {
     askForName();
