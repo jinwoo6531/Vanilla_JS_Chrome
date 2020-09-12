@@ -3,7 +3,28 @@ const toDoForm = document.querySelector(".js-toDoForm"),
     toDoList = document.querySelector(".js-toDoList");
 
 const TODOS_LS = "toDos";
-const toDos = [];
+let toDos = [];
+
+function deleteToDo(event) {
+    //console.dir을 통해 부모를 찾자
+    //console.log(event.target.parentNode);
+
+    //html에서 제거
+    const delBtn = event.target;
+    const li = delBtn.parentNode;
+    toDoList.removeChild(li);
+
+    //배열에서 제거
+    const cleanTodo = toDos.filter((item) => {
+        return item.id !== parseInt(li.id);
+    })
+
+    //제거한것을 배열에 다시 담고 저장(새로고침하면 값이 저장된게 보인다)
+    toDos = cleanTodo;
+    saveToDos();
+    
+}
+
 
 
 function saveToDos() {
@@ -12,7 +33,8 @@ function saveToDos() {
 
 function paintToDo(text) { 
     const li = document.createElement("li");
-    const delBtn = document.createElement("button");    
+    const delBtn = document.createElement("button");
+    delBtn.addEventListener("click",deleteToDo);    
     const span = document.createElement("span");
     const newId = toDos.length + 1;
     delBtn.innerText = "❌";
